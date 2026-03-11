@@ -1,0 +1,657 @@
+
+QUESTION
+what is Cloud Provisioner and what is MSAI, explain is layman terms. Also explain how they are connected, what's the need for both and how they are functioning. What problem they are solving.
+
+Here’s a layman’s explanation of Cloud Provisioner and MSAI, how they are connected, why both are needed, how they function, and what problems they solve:
+
+What is MSAI?
+MSAI stands for Microservices Architecture Infrastructure. Think of it as a set of tools and rules that help companies automatically set up and manage the cloud infrastructure needed to run modern software applications (especially those built using containers and microservices). Instead of people manually creating servers, databases, and networks, MSAI does this automatically using code and automation 
+1
+.
+
+Purpose: Make it easy, fast, and consistent to create, update, and manage cloud environments for development, testing, and production.
+
+How: Uses automation to create things like Kubernetes clusters, storage, networking, and security settings in the cloud (mainly Azure).
+
+Who benefits: Developers, QA, and operations teams—anyone who needs to deploy or manage cloud-based applications.
+
+What is Cloud Provisioner?
+Cloud Provisioner is a specialized automation tool that works within the MSAI ecosystem. Its job is to actually “do” the work of setting up, updating, or tearing down cloud environments as requested 
+2
+ 
+3
+.
+
+Purpose: Automate the process of deploying, updating, or deleting cloud resources and applications.
+
+How: It receives job requests (like “create a new environment for customer X”), figures out what needs to be done, and then runs a series of steps (called modules) to make it happen. It keeps track of everything it does, so changes can be audited and repeated if needed.
+
+Who benefits: Cloud operators, developers, and QA teams who want to deploy or manage applications without manual steps.
+
+How are MSAI and Cloud Provisioner Connected?
+MSAI is the overall system or framework for managing cloud infrastructure.
+
+Cloud Provisioner is a key tool within MSAI that actually performs the automated setup, updates, and teardown of environments.
+
+Analogy: If MSAI is the “recipe” and “kitchen rules” for making a cake, Cloud Provisioner is the “robot chef” that follows those recipes and rules to bake the cake automatically.
+
+Why are Both Needed?
+MSAI provides the standards, templates, and automation logic for how environments should be built and managed.
+
+Cloud Provisioner executes those standards and logic, doing the actual work of creating, updating, or deleting resources.
+
+Together: They ensure that environments are created the same way every time, are secure, and can be managed or updated easily—without manual errors or inconsistencies.
+
+How Do They Function?
+MSAI defines what needs to be done (e.g., “create a Kubernetes cluster with these settings”).
+
+Cloud Provisioner takes those instructions and runs automated jobs to make it happen, using modules for each step (like setting up storage, networking, or deploying applications) 
+2
+ 
+3
+.
+
+State Tracking: Everything Cloud Provisioner does is tracked in a “state repository,” so you always know what’s been set up and can repeat or undo actions if needed.
+
+What Problems Do They Solve?
+Manual Work: No more manually clicking around cloud dashboards or writing custom scripts for every deployment.
+
+Consistency: Every environment is set up the same way, reducing bugs and surprises.
+
+Speed: New environments can be created or updated in minutes, not days.
+
+Auditability: All changes are tracked, so you know who did what and when.
+
+Scalability: Can handle many environments and customers at once, supporting growth and complex needs.
+
+Cost and Risk Reduction: Less manual work means fewer mistakes, lower costs, and faster delivery 
+1
+ 
+4
+ 
+5
+.
+
+In summary:
+MSAI is the overall system for managing cloud infrastructure using automation and best practices. Cloud Provisioner is the tool that actually does the work, following MSAI’s rules. Together, they make cloud operations faster, safer, and more reliable for everyone involved.
+
+ 
+2
+: Cloud Provisioner - Architecture
+ 
+3
+: Cloud Provisioner - Modules
+ 
+1
+: MSAI Azure Cloud Platform (Landing page)
+ 
+4
+: [[Follow-up from "B"] CD/MSAI [Part 4]- Providing end-to-end product provisioning for Cloud Operations and Cloud engineering]
+ 
+5
+: MSAI Cloud Services Use Cases
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+QUESTION
+who are the customers you are refing to, explain with a example of usage 
+
+When we talk about "customers" in the context of MSAI and Cloud Provisioner, we are referring to organizations or teams that use the ThingWorx platform and related IoT products, hosted on the PTC Cloud. These customers can be external companies who have purchased ThingWorx as a service, or internal teams (like R&D, QA, or Cloud Operations) who need to deploy, test, or maintain environments in the cloud.
+
+Example of Customer Usage
+Scenario:
+A manufacturing company, "Acme Manufacturing," uses ThingWorx (an IoT platform) to monitor and manage their factory equipment. They want their ThingWorx environment to be hosted in the cloud, so they don't have to manage servers or infrastructure themselves.
+
+How MSAI and Cloud Provisioner Help
+Acme Manufacturing signs up for ThingWorx as a cloud service (they become a "customer").
+
+The PTC Cloud team uses MSAI to define what Acme's environment should look like (e.g., how many servers, what security settings, which applications).
+
+Cloud Provisioner is then used to automatically create Acme's cloud environment—setting up servers, databases, networking, and deploying the ThingWorx application—without manual work.
+
+If Acme needs an upgrade, more capacity, or a new feature, the Cloud Provisioner can update their environment automatically, following the rules set by MSAI.
+
+All changes are tracked, so Acme and PTC can see what was done, when, and by whom.
+
+Why Is This Needed?
+For customers like Acme: They get a reliable, secure, and up-to-date ThingWorx environment without needing cloud expertise.
+
+For PTC Cloud teams: They can manage many customer environments efficiently, keep everything consistent, and quickly roll out updates or fixes.
+
+Other Examples
+Migrating from on-premises to cloud: A customer with an old, on-premises ThingWorx deployment can have their environment (including security settings like SSO and keystores) migrated to the cloud using MSAI and Cloud Provisioner, with minimal manual effort 
+1
+.
+
+Internal QA or R&D teams: These teams act as "customers" when they need to spin up test environments that mimic real customer setups, ensuring new features or fixes work as expected before release 
+2
+.
+
+In summary:
+A "customer" is anyone (external company or internal team) who needs a ThingWorx environment managed in the cloud. MSAI and Cloud Provisioner automate the setup, management, and updating of these environments, making cloud operations faster, safer, and more reliable for both the customer and the service provider 
+3
+ 
+1
+ 
+2
+.
+
+
+QUESTION
+
+explain me what environment are you talking about , explain it’s context. 
+Also expain me what is PTC Cloud, is cloud provisioner is the PTC cloud or something else.
+Also tell if I am right or wrong, if Acme wants to update their enviornment it will ask or call PTC help center to do so or someone at acme will use Cloud provision and do it themselves
+
+1. What is an "Environment" in this Context?
+An environment refers to a complete, isolated setup of all the software, infrastructure, and configurations needed to run a specific instance of the ThingWorx platform (or related IoT applications) for a customer or internal team. Think of it as a “workspace” in the cloud that includes:
+
+Application servers (e.g., ThingWorx)
+
+Databases (e.g., PostgreSQL)
+
+Networking and security settings
+
+Storage
+
+Any required extensions or connectors
+
+Each customer (like Acme Manufacturing) gets their own environment, which is separate from others. This allows for custom configurations, upgrades, and testing without affecting anyone else 
+1
+ 
+2
+ 
+3
+.
+
+2. What is PTC Cloud?
+PTC Cloud is a managed cloud service provided by PTC (the company behind ThingWorx). It hosts and operates ThingWorx and related applications for customers, so they don’t have to manage servers, security, or infrastructure themselves. PTC Cloud handles:
+
+Provisioning (setting up) environments
+
+Maintenance, upgrades, and backups
+
+Security and compliance
+
+Support and troubleshooting
+
+Customers pay for the service and get a reliable, scalable, and secure platform without needing deep cloud expertise 
+4
+.
+
+3. Is Cloud Provisioner the Same as PTC Cloud?
+No, Cloud Provisioner is not the same as PTC Cloud.
+
+PTC Cloud is the overall managed service/platform.
+
+Cloud Provisioner is an automation tool/framework used by PTC Cloud teams (and sometimes by advanced internal users) to set up, update, and manage those environments in an automated, consistent way 
+5
+ 
+3
+.
+
+Analogy:
+PTC Cloud is like a hotel. Cloud Provisioner is the automated housekeeping and maintenance system that prepares rooms (environments), cleans them, and upgrades them as needed.
+
+4. Who Updates the Environment—Customer or PTC?
+In most cases, customers like Acme do NOT directly use Cloud Provisioner themselves.
+Instead, here’s how it works:
+
+If Acme wants to update their environment (e.g., upgrade ThingWorx, add a new feature, or increase capacity), they typically contact PTC Cloud support or help center.
+
+The PTC Cloud operations team then uses Cloud Provisioner to perform the requested update in a controlled, automated, and auditable way 
+6
+ 
+7
+.
+
+Some advanced operations (like updating OAuth credentials or certain connectors) may be exposed via a web interface for customers, but most infrastructure changes are handled by PTC Cloud staff for security and reliability 
+8
+ 
+9
+.
+
+So you are correct:
+If Acme wants to update their environment, they will ask PTC (via help center or support), and the PTC Cloud team will use Cloud Provisioner to make the change. Acme does not run Cloud Provisioner themselves.
+
+5. Why This Approach?
+Security: Prevents accidental or unauthorized changes.
+
+Consistency: Ensures all environments are managed the same way.
+
+Support: PTC can track, audit, and roll back changes if needed.
+
+Customer Experience: Customers get a managed service and don’t need to learn complex cloud tools.
+
+
+QUESTION
+So there are many instances of the thingworx application running on PTC cloud each for different customers just like 
+Acme. Also tell me if Acme wants a feature in thingworx platform so it will ask ptc to build it and then
+how team ptc  will deliver it to acme? what's the full workflow, as if they are changing the thingworx app adding new feature
+then it should be added as a whole and must be integratd in all instances or to all customers, if not then how these 
+things are managed like one feature added for a particular company and a new feature for the other
+
+If Acme Wants a New Feature: The Full Workflow
+1. Feature Request
+Acme (the customer) identifies a need for a new feature in the ThingWorx platform.
+
+Acme submits this request to PTC, usually via their account manager, support ticket, or customer success channel.
+
+2. Evaluation
+PTC’s product management and engineering teams review the request.
+
+They decide if the feature is:
+
+Useful for all customers (a platform feature)
+
+Specific to Acme (a customization)
+
+Feasible to implement
+
+3. Development
+If approved, PTC’s engineering team develops the feature.
+
+Platform Feature: Developed as part of the main ThingWorx codebase.
+
+Customer-Specific Feature: May be developed as a plugin, extension, or configuration that only applies to Acme’s environment.
+
+4. Testing
+The new feature is tested internally by PTC QA.
+
+For platform features, it’s validated to work across all supported environments and not break existing functionality for other customers.
+
+For customer-specific features, it’s tested in a staging environment that mimics Acme’s setup.
+
+5. Delivery & Deployment
+Platform Feature:
+
+Included in the next scheduled ThingWorx release or maintenance update.
+
+PTC Cloud operations team uses automation (like Cloud Provisioner/MSAI) to roll out the new version to all customer environments, either all at once or in phases.
+
+Customer-Specific Feature:
+
+Deployed only to Acme’s environment, often as a configuration change, extension, or add-on.
+
+PTC Cloud team uses Cloud Provisioner to update just Acme’s instance, without affecting others.
+
+6. Customer Validation
+Acme is notified when the feature is live.
+
+They can test and validate it in their environment.
+
+If issues arise, PTC provides support and may issue hotfixes or further updates.
+
+How Are Features Managed Across Customers?
+Common Platform Features: Delivered to all customers as part of regular ThingWorx releases. All environments are upgraded to maintain consistency and security 
+1
+.
+
+Custom Features: Can be delivered only to specific customers. These are managed as separate modules, plugins, or configurations, so one customer’s customization doesn’t impact others 
+2
+.
+
+Component Additions: PTC Cloud can add or remove optional components (like analytics or connectors) to a customer’s environment without reinstalling everything, using automation 
+2
+.
+
+
+QUESTION
+what is the concept of namespaces, explain in detail , also take exampe of CRT namespace
+
+
+What is a Namespace?
+A namespace is a way to logically divide and organize resources within a larger system—like a Kubernetes cluster or a cloud platform—so that different teams, projects, or customers can have their own isolated environments.
+Think of a namespace as a “container” or “folder” that holds all the resources (applications, databases, secrets, etc.) for a specific purpose, team, or customer. Namespaces help prevent conflicts, improve security, and make management easier.
+
+Why Use Namespaces?
+Isolation: Resources in one namespace are separated from those in another. This means one team’s work won’t accidentally affect another’s.
+
+Organization: Makes it easy to find and manage resources for a specific team, customer, or environment (like dev, QA, prod).
+
+Security: Access and network rules can be set per namespace, so only authorized users or services can interact with resources inside.
+
+Scalability: Multiple teams or customers can share the same underlying infrastructure (like a Kubernetes cluster) without interfering with each other 
+
+Namespaces in MSAI and Cloud Provisioner
+In the MSAI and Cloud Provisioner ecosystem:
+
+Each environment (for a customer, team, or use case) gets its own namespace.
+
+Cloud Provisioner automates the creation and management of these namespaces when deploying environments.
+
+Namespaces are named using conventions, often including the team or customer name (e.g., crt123, acme-prod, acme-dev).
+
+Example: CRT Namespace
+Let’s say the Customer Response Team (CRT) needs to deploy and test a new version of ThingWorx for debugging a customer issue. Here’s how namespaces work for CRT:
+
+CRT runs a Cloud Provisioner job to create a new environment for their testing.
+
+Cloud Provisioner creates a dedicated namespace in the Kubernetes cluster, e.g., crt456.
+
+All resources for this CRT environment (pods, services, secrets, etc.) are created inside crt456.
+
+CRT team members can access and debug only their namespace, without affecting other teams or customer environments.
+
+When done, the namespace (and all its resources) can be deleted cleanly, freeing up resources and keeping the cluster tidy 
+
+How Namespaces Are Used
+Teams: Each team (like CRT) gets its own namespace(s) for their work.
+
+Customers: Each customer’s environment is deployed in its own namespace, ensuring their data and applications are isolated.
+
+Environments: You can have separate namespaces for dev, QA, and production for the same customer or team (e.g., acme-dev, acme-prod).
+
+Technical Example (CRT):
+CRT deploys an environment using Cloud Provisioner.
+
+The namespace might be named crt789.
+
+CRT accesses the environment using Kubernetes commands, always specifying their namespace:
+
+
+
+kubectl config set-context --current --namespace=crt789
+kubectl get pods
+Only CRT’s resources show up, and their changes don’t affect anyone else 
+
+
+
+QUESTION:
+cloud provisioner is something that is auto deployed, meaning when we push code cp picks it up runs pipeline, tell me what happens in pipeline, does our apllication gets deployed to production by pipeline? as cp allocate cloud resource, 
+
+Let’s break down what happens when you push code and how Cloud Provisioner (CP) fits into the deployment pipeline, especially regarding production deployments:
+
+1. Is Cloud Provisioner Auto-Deployed?
+Cloud Provisioner itself is an automation tool that runs as a service (often in Kubernetes) and listens for deployment jobs.
+
+When you push code (for example, a new version of the ThingWorx application or a related module), this triggers a CI/CD pipeline (usually in Jenkins).
+
+2. What Happens in the Pipeline?
+Here’s a typical workflow:
+
+a. Code Push & Build
+You push code to the repository (e.g., Bitbucket).
+
+The CI/CD pipeline is triggered (Jenkins job starts).
+
+The pipeline builds your application artifacts (Docker images, Helm charts, etc.).
+
+b. Testing & Validation
+The pipeline runs unit tests, integration tests, and sometimes functional tests.
+
+Linting and validation of Cloud Provisioner modules and deployment charts are performed 
+1
+.
+
+c. Staging/QA Deployment
+If tests pass, the pipeline may deploy the new version to a staging or QA environment using Cloud Provisioner.
+
+This step ensures the new code works in a production-like environment before going live.
+
+d. Promotion to Production
+After successful QA/staging validation, a manual approval or automated rule can promote the build to production.
+
+Cloud Provisioner is then used to deploy the new version to production environments.
+
+This includes allocating or updating cloud resources (VMs, databases, storage, networking) as defined in the deployment configuration 
+2
+ 
+3
+.
+
+3. Does the Application Get Deployed to Production Automatically?
+Not always fully automatic:
+While the pipeline can automate most steps, production deployments often require an explicit approval (manual gate) to avoid accidental outages.
+
+Cloud Provisioner handles the actual deployment:
+Once approved, CP allocates cloud resources and deploys the application to production, following the defined modules and state files 
+2
+ 
+3
+.
+
+4. What Does Cloud Provisioner Actually Do?
+Allocates/updates cloud resources (using Terraform, Helm, etc.).
+
+Deploys application artifacts (like ThingWorx, connectors, analytics modules).
+
+Tracks state in a repository so every change is auditable and repeatable.
+
+Supports rollbacks and upgrades as needed.
+
+5. Summary Table
+Step |Who/What Triggers It |What Happens
+
+Code Push| Developer |Triggers CI/CD pipeline
+Build & Test| Jenkins/CI| Build, test, validate artifacts
+Staging/QA Deploy| Pipeline + Cloud Provisioner |Deploy to QA/staging, run more tests
+Production Approval| MaNual/Automated |Approve for production
+Production Deploy |Cloud Provisioner |Allocate resources, deploy app to production
+
+
+
+Key Points from the Confluence Page
+Developing CP involves setting up your environment, cloning the code, installing dependencies, and configuring launch files.
+
+Deploying CP is necessary to run jobs outside Jenkins, for debugging, or for running in different clusters. You can deploy as Docker (recommended for dev) or as a Kubernetes pod for real deployments 
+
+Keeping CP up to date is important, as modules and deployment logic change frequently. Developers are expected to pull updates and redeploy as needed 
+
+
+
+QUESTION
+explain with an example, take that acme company as example, they have thingworx deployed as separate enviornment as a pod, suddenly they needed a feature, they 
+called ptc help center then the issue is alllocated to development team now what development team will do, explain the whole flow from making changes to testing and finally deploying using cp, when they will use cp and when not, 
+
+Scenario: Acme Requests a New Feature
+1. Feature Request
+Acme, who has their own ThingWorx environment (running as a pod in PTC Cloud), needs a new feature.
+
+They contact the PTC Help Center/support.
+
+2. Ticket Triage & Assignment
+The support/help center logs the request and assigns it to the relevant development team (could involve CRT for triage and initial investigation).
+
+3. Development
+The development team reviews the request, designs, and implements the new feature in the ThingWorx codebase or as a plugin/extension.
+
+Code is pushed to the repository, triggering the CI/CD pipeline.
+
+4. Testing
+Automated tests run in the pipeline (unit, integration, security).
+
+The feature is deployed to a staging/QA environment (often a separate namespace or cluster) using Cloud Provisioner.
+
+QA and possibly CRT validate the feature in this isolated environment to ensure it works and doesn’t break anything else.
+
+5. Approval & Release Planning
+If the feature is for all customers, it’s scheduled for the next ThingWorx release.
+
+If it’s Acme-specific, it’s prepared as a custom deployment or configuration.
+
+6. Production Deployment Using Cloud Provisioner
+Cloud Provisioner is used here:
+
+For platform-wide features: CP is used to roll out the new version to all customer environments, including Acme’s.
+
+For Acme-only features: CP is used to update just Acme’s environment (namespace/pod) with the new code or configuration.
+
+CP automates:
+
+Allocating/updating cloud resources if needed.
+
+Deploying the new application version or plugin.
+
+Tracking the deployment state for audit and rollback.
+
+7. Customer Validation
+Acme is notified that the feature is live.
+
+They test and confirm it in their environment.
+
+Any issues are reported back, and the cycle repeats if fixes are needed.
+
+When is Cloud Provisioner Used?
+Always used for deploying to cloud environments (QA, staging, production).
+
+Used for both platform-wide and customer-specific updates.
+
+Not used for local development or initial code writing—developers use their own tools for that.
+
+When is Cloud Provisioner NOT Used?
+During local development and initial coding (developers use local Docker/K8s or dev clusters).
+
+For manual, one-off fixes (though these are discouraged; automation is preferred for consistency and auditability).
+
+
+
+
+QUESTION:
+so after the code is pushed, pipeline is triggerd, feature gets deployed to staging/QA enviornment from there CRT team test it. so at that stage how CRT team 
+validate the feature in isolated enviorment to ensure everything is right, how they do it what steps they take, ?
+When the CRT (Customer Response Team) validates a new feature in an isolated staging/QA environment, they follow a structured process to ensure the feature works as expected and doesn’t break anything else. Here’s how they typically do it:
+
+1. Environment Setup
+The new feature is deployed to a dedicated QA or staging namespace/environment using Cloud Provisioner.
+
+This environment is isolated, so CRT can test without impacting production or other teams.
+
+2. Smoke Testing
+CRT starts with smoke tests: quick checks to confirm the environment is healthy and the core application components are running.
+
+This includes verifying that services start, basic UI loads, and APIs respond 
+1
+.
+
+3. Functional Testing
+CRT runs functional tests to check that the new feature behaves as intended.
+
+They use automated test suites (triggered by the pipeline) and may also perform manual testing for complex scenarios.
+
+They validate both the new feature and existing core functionalities to ensure nothing else is broken (regression testing) 
+1
+ 
+2
+.
+
+4. Integration Testing
+If the feature interacts with other services or components, CRT runs integration tests.
+
+This ensures the new code works well with other parts of the system and with external dependencies 
+3
+.
+
+5. Scenario/Use Case Validation
+CRT simulates real-world customer scenarios, especially those relevant to the feature or bug fix.
+
+For example, if the feature is about license updates, they’ll deploy with a default license, update it, and verify all system functions post-update 
+4
+ 
+5
+ 
+6
+.
+
+6. Issue Logging and Feedback
+If any issues are found, CRT logs bugs in Jira, specifying the environment, steps to reproduce, and affected scenarios.
+
+If the issue is critical, the deployment is blocked from moving forward until fixed.
+
+7. Promotion or Rework
+If all tests pass, CRT marks the feature as “Ready for Release” or “Done.”
+
+If issues are found, the feature goes back to development for rework, and the process repeats 
+2
+.
+
+Example: CRT Validating a License Update Feature
+Deploy the new build to a QA namespace using Cloud Provisioner.
+
+Run smoke tests to ensure the environment is healthy.
+
+Apply the default license and verify system operation.
+
+Generate and apply a new license; confirm the update process works.
+
+Perform end-to-end testing of all critical features to ensure nothing is broken.
+
+Log any issues found; if all is well, approve for production 
+4
+ 
+5
+ 
+6
+.
+
+QUESTION::
+also the code is in separate namespace in staging/QA is there which CRT team tests so the CRT team clone it from there in their local system and do the tests or they directly log into the deployed app in K8s cluster go into the pod and change the files and do their work? 
+how does all things work in reality, like after development, pipeline triggers which deploys code in cluster maybe in test cluster for QA and CRT team to test
+1. Code Deployment to Staging/QA Namespace
+After development, the CI/CD pipeline builds the new code and deploys it to a dedicated namespace in a Kubernetes cluster (often called staging or QA).
+
+This namespace is isolated: it contains its own pods, services, configs, and data, separate from production and other teams/customers.
+
+2. How Does CRT Access and Test the Deployed App?
+CRT and QA teams do NOT typically clone the code from the staging namespace to their local systems for testing.
+Instead, they interact directly with the deployed application in the cluster:
+
+A. Direct Application Access
+CRT accesses the application via its exposed endpoints (web UI, APIs, etc.)—just like a real user or customer would.
+
+They use test accounts, scripts, or manual testing to validate the new feature and overall system behavior.
+
+B. Kubernetes Access (Advanced Debugging)
+If deeper investigation is needed, CRT may use kubectl to:
+
+View logs (kubectl logs <pod> -n <namespace>)
+
+Exec into pods for troubleshooting (kubectl exec -it <pod> -n <namespace> -- /bin/sh)
+
+Check resource status, events, and configuration
+
+CRT does NOT usually change code or files inside the running pods in staging/QA.
+
+Any code changes must go through the normal development and CI/CD process for traceability and auditability.
+
+Hotfixes or manual changes inside pods are discouraged and only used for emergency debugging, not for regular testing.
+
+C. Automated and Manual Testing
+Automated test suites may run as part of the pipeline or be triggered by CRT.
+
+Manual exploratory testing is performed via the app’s UI or APIs in the staging namespace.
+
+3. Why Not Clone or Change Code Locally?
+The goal is to test the actual deployed artifact in an environment that closely matches production.
+
+Local changes or manual tweaks inside pods would not reflect what’s really deployed and could introduce inconsistencies.
+
+All changes should be version-controlled and deployed via the pipeline for consistency, audit, and rollback.
+
+4. Typical CRT Testing Steps
+Get access to the staging/QA namespace (credentials, endpoints).
+
+Run smoke tests to ensure the environment is healthy.
+
+Perform functional and regression tests on the new feature and existing functionality.
+
+Check logs and metrics for errors or performance issues.
+
+Report bugs or issues in Jira (or similar).
+
+Approve or reject the build for production deployment
+
+
